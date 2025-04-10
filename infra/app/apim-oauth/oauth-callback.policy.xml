@@ -53,9 +53,10 @@
           <!-- STEP 7: Generate secure session token for MCP client -->
         <set-variable name="IV" value="{{EncryptionIV}}" />
         <set-variable name="key" value="{{EncryptionKey}}" />
+        <set-variable name="sessionId" value="@((string)Guid.NewGuid().ToString().Replace("-", ""))" />
         <set-variable name="encryptedSessionKey" value="@{
             // Generate a unique session ID
-            string sessionId = "sessionId123";
+            string sessionId = (string)context.Variables.GetValueOrDefault("sessionId");
             byte[] sessionIdBytes = Encoding.UTF8.GetBytes(sessionId);
             
             // Encrypt the session ID using AES
@@ -73,13 +74,13 @@
         
         <!-- STEP 9: Store the encrypted session key and Entra token in cache -->
         <!-- Store the encrypted session key with the MCP confirmation code as key -->
-        <cache-store-value duration="700" 
+        <cache-store-value duration="3600" 
             key="@($"AccessToken-{context.Variables.GetValueOrDefault("mcpConfirmConsentCode")}")" 
             value="@($"{context.Variables.GetValueOrDefault("encryptedSessionKey")}")" />
         
         <!-- Store the Entra token for later use -->
-        <cache-store-value duration="700" 
-            key="@($"EntraToken-{context.Variables.GetValueOrDefault("mcpConfirmConsentCode")}")" 
+        <cache-store-value duration="3600" 
+            key="@($"EntraToken-{context.Variables.GetValueOrDefault("sessionId")}")"
             value="@(context.Response.Body.As<JObject>(preserveContent: true).ToString())" />
         
         <!-- STEP 10: Redirect back to MCP client with confirmation code -->
