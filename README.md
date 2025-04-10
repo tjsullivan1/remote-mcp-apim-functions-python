@@ -1,3 +1,20 @@
+<!--
+---
+name: Remote MCP  using Azure API Management (Experimental)
+description: Use Azure API Management as the AI Gateway for MCP Servers using Azure Functions  
+page_type: sample
+languages:
+- python
+- bicep
+- azdeveloper
+products:
+- azure-api-management
+- azure-functions
+- azure
+urlFragment: remote-mcp-apim-functions-python
+---
+-->
+
 # Secure Remote MCP Servers using Azure API Management (Experimental)
 
 ![Diagram](mcp-client-authorization.gif)
