@@ -60,17 +60,17 @@
         <set-variable name="mcpConfirmConsentCode" value="@((string)Guid.NewGuid().ToString())" />
         
         <!-- Store code verifier for token exchange -->
-        <cache-store-value duration="700" 
+        <cache-store-value duration="3600" 
             key="@("CodeVerifier-"+context.Variables.GetValueOrDefault("state", ""))" 
             value="@(context.Variables.GetValueOrDefault("codeVerifier", ""))" />
         
         <!-- Map state to MCP confirmation code for callback -->
-        <cache-store-value duration="700" 
+        <cache-store-value duration="3600" 
             key="@((string)context.Variables.GetValueOrDefault("state"))" 
             value="@(context.Variables.GetValueOrDefault("mcpConfirmConsentCode", ""))" />
         
         <!-- Store MCP client PKCE data for verification during token exchange -->
-        <cache-store-value duration="700" 
+        <cache-store-value duration="3600" 
             key="@($"McpClientAuthData-{context.Variables.GetValueOrDefault("mcpConfirmConsentCode")}")" 
             value="@{
                 // Create a JObject and populate it with values

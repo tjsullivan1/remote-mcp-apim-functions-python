@@ -10,11 +10,15 @@ This is a [sequence diagram](infra/app/apim-oauth/diagrams/diagrams.md) to under
 
 ## Deploy Remote MCP Server to Azure
 
-Run this [azd](https://aka.ms/azd) command to provision the api management service, function app(with code) and all other required Azure resources
+1. Register `Microsoft.App` resource provider.
+    * If you are using Azure CLI, run `az provider register --namespace Microsoft.App --wait`.
+    * If you are using Azure PowerShell, run `Register-AzResourceProvider -ProviderNamespace Microsoft.App`. Then run `(Get-AzResourceProvider -ProviderNamespace Microsoft.App).RegistrationState` after some time to check if the registration is complete.
 
-```shell
-azd up
-```
+2. Run this [azd](https://aka.ms/azd) command to provision the api management service, function app(with code) and all other required Azure resources
+
+    ```shell
+    azd up
+    ```
 
 ### MCP Inspector
 
@@ -24,10 +28,9 @@ azd up
     npx @modelcontextprotocol/inspector
     ```
 
-2. CTRL click to load the MCP Inspector web app from the URL displayed by the app (e.g. http://127.0.0.1:6274/#resources)
-1. Make sure update the host to **localhost** (e.g. http://localhost:6274/#resources)
+1. CTRL click to load the MCP Inspector web app from the URL displayed by the app (e.g. http://127.0.0.1:6274/#resources)
 1. Set the transport type to `SSE`
-1. Set the URL to your running API Management SSE endpoint and **Connect**:
+1. Set the URL to your running API Management SSE endpoint displayed after `azd up` and **Connect**:
 
     ```shell
     https://<apim-servicename-from-azd-output>.azure-api.net/mcp/sse

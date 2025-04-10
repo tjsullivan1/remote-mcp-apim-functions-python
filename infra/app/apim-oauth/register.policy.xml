@@ -13,12 +13,12 @@
         <!-- STEP 1: Extract client registration data from request -->
         <set-variable name="requestBody" value="@(context.Request.Body.As<JObject>(preserveContent: true))" />
           <!-- STEP 2: Store registration information in cache -->
-        <cache-store-value duration="700" 
+        <cache-store-value duration="3600" 
             key="DynamicClientRegistration" 
             value="@(context.Variables.GetValueOrDefault<JObject>("requestBody").ToString())" />
         
         <!-- Store the redirect URI -->
-        <cache-store-value duration="700" 
+        <cache-store-value duration="3600" 
             key="ClientRedirectUri" 
             value="@(context.Variables.GetValueOrDefault<JObject>("requestBody")["redirect_uris"][0].ToString())" />
         

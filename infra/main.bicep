@@ -84,6 +84,7 @@ module mcpApiModule './app/apim-mcp/mcp-api.bicep' = {
   }
   dependsOn: [
     api
+    oauthAPIModule
   ]
 }
 
@@ -233,4 +234,4 @@ output AZURE_LOCATION string = location
 output AZURE_TENANT_ID string = tenant().tenantId
 output SERVICE_API_NAME string = api.outputs.SERVICE_API_NAME
 output AZURE_FUNCTION_NAME string = api.outputs.SERVICE_API_NAME
-output MCP_ENDPOINT string = '${apimService.outputs.gatewayUrl}/mcp/sse'
+output SERVICE_API_ENDPOINTS array = [ '${apimService.outputs.gatewayUrl}/mcp/sse' ]
