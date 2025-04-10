@@ -6,6 +6,8 @@ Azure API Management acts as the [AI Gateway](https://github.com/Azure-Samples/A
 
 This sample implements the latest [MCP Authorization specification](https://modelcontextprotocol.io/specification/2025-03-26/basic/authorization#2-10-third-party-authorization-flow)
 
+This is a [sequence diagram](infra/app/apim-oauth/diagrams/diagrams.md) to understand the flow.
+
 ## Deploy Remote MCP Server to Azure
 
 Run this [azd](https://aka.ms/azd) command to provision the api management service, function app(with code) and all other required Azure resources
