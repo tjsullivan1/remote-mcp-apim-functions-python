@@ -34,11 +34,33 @@ module entraApp './entra-app.bicep' = {
   }
 }
 
-// Generate cryptographic values for encryption
-module cryptoGenerator './crypto-generator.bicep' = {
-  name: 'cryptoGenerator'
-  params: {
-    location: location
+// Using a deployment script to generate cryptographically secure values for AES encryption
+// Key is 32 bytes (256-bit) and IV is 16 bytes (128-bit)
+resource cryptoValuesScript 'Microsoft.Resources/deploymentScripts@2020-10-01' = {
+  name: 'generateCryptoValues'
+  location: location
+  kind: 'AzurePowerShell'
+  properties: {
+    azPowerShellVersion: '7.0'
+    timeout: 'PT30M'
+    retentionInterval: 'P1D'
+    scriptContent: '''
+      # Generate random 32 bytes (256-bit) key for AES-256
+      $key = New-Object byte[] 32
+      $rng = [System.Security.Cryptography.RandomNumberGenerator]::Create()
+      $rng.GetBytes($key)
+      $keyBase64 = [Convert]::ToBase64String($key)
+      
+      # Generate random 16 bytes (128-bit) IV
+      $iv = New-Object byte[] 16
+      $rng.GetBytes($iv)
+      $ivBase64 = [Convert]::ToBase64String($iv)
+      
+      # Output the values
+      $DeploymentScriptOutputs = @{}
+      $DeploymentScriptOutputs['encryptionKey'] = $keyBase64
+      $DeploymentScriptOutputs['encryptionIV'] = $ivBase64
+    '''
   }
 }
 
@@ -98,7 +120,7 @@ resource EncryptionIVNamedValue 'Microsoft.ApiManagement/service/namedValues@202
   name: 'EncryptionIV'
   properties: {
     displayName: 'EncryptionIV'
-    value: cryptoGenerator.outputs.encryptionIV
+    value: cryptoValuesScript.properties.outputs.encryptionIV
     secret: true
   }
 }
@@ -108,7 +130,7 @@ resource EncryptionKeyNamedValue 'Microsoft.ApiManagement/service/namedValues@20
   name: 'EncryptionKey'
   properties: {
     displayName: 'EncryptionKey'
-    value: cryptoGenerator.outputs.encryptionKey
+    value: cryptoValuesScript.properties.outputs.encryptionKey
     secret: true
   }
 }
