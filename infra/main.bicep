@@ -65,8 +65,8 @@ module oauthAPIModule './app/apim-oauth/oauth.bicep' = {
   scope: rg
   params: {
     location: location
-    entraAppUniqueName: !empty(mcpEntraApplicationUniqueName) ? mcpEntraApplicationUniqueName : 'mcp-oauth-${apimResourceToken}-${abbrs.applications}'
-    entraAppDisplayName: !empty(mcpEntraApplicationDisplayName) ? mcpEntraApplicationDisplayName : 'MCP-OAuth-${apimResourceToken}-${abbrs.applications}'
+    entraAppUniqueName: !empty(mcpEntraApplicationUniqueName) ? mcpEntraApplicationUniqueName : 'mcp-oauth-${abbrs.applications}${apimResourceToken}'
+    entraAppDisplayName: !empty(mcpEntraApplicationDisplayName) ? mcpEntraApplicationDisplayName : 'MCP-OAuth-${abbrs.applications}${apimResourceToken}'
     apimServiceName: apimService.name
     oauthScopes: oauth_scopes
     entraAppUserAssignedIdentityPrincipleId: apimService.outputs.entraAppUserAssignedIdentityPrincipleId
