@@ -140,6 +140,17 @@ This API implements the complete OAuth 2.0 authorization server functionality re
   5. Stores authentication state in APIM cache
   6. Redirects user to Entra ID for authentication
 
+**Consent Management** (`GET/POST /consent`)
+- **Purpose**: Handles user consent for MCP client access
+- **Features**: Consent persistence via secure cookies
+
+**OAuth Metadata Endpoint** (`GET /.well-known/oauth-authorization-server`)
+- **Purpose**: Publishes OAuth server configuration per RFC 8414
+- **Returns**: JSON metadata about supported endpoints, flows, and capabilities
+  
+**Client Registration** (`POST /register`)
+- **Purpose**: Supports dynamic client registration per MCP specification
+
 **Token Endpoint** (`POST /token`)
 - **Purpose**: Exchanges authorization codes for access tokens
 - **Policy Logic**:
@@ -148,17 +159,6 @@ This API implements the complete OAuth 2.0 authorization server functionality re
   3. Generates encrypted session key for MCP API access
   4. Caches the access token with session key mapping
   5. Returns encrypted session key to MCP client
-
-**Metadata Endpoint** (`GET /.well-known/oauth-authorization-server`)
-- **Purpose**: Publishes OAuth server configuration per RFC 8414
-- **Returns**: JSON metadata about supported endpoints, flows, and capabilities
-
-**Consent Management** (`GET/POST /consent`)
-- **Purpose**: Handles user consent for MCP client access
-- **Features**: Consent persistence via secure cookies
-
-**Client Registration** (`POST /register`)
-- **Purpose**: Supports dynamic client registration per MCP specification
 
 #### Named Values and Configuration
 
