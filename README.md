@@ -1,6 +1,6 @@
 <!--
 ---
-name: Remote MCP  using Azure API Management (Experimental)
+name: Remote MCP  using Azure API Management
 description: Use Azure API Management as the AI Gateway for MCP Servers using Azure Functions  
 page_type: sample
 languages:
@@ -58,7 +58,9 @@ This is a [sequence diagram](infra/app/apim-oauth/diagrams/diagrams.md) to under
 
 ## Technical Architecture Overview
 
-This solution deploys a secure, production-ready MCP (Model Context Protocol) server infrastructure on Azure. The architecture implements a multi-layered security model with Azure API Management serving as an intelligent gateway that handles authentication, authorization, and request routing.
+This solution deploys a secure MCP (Model Context Protocol) server infrastructure on Azure. The architecture implements a multi-layered security model with Azure API Management serving as an intelligent gateway that handles authentication, authorization, and request routing.
+
+[overview diagram](infra/app/apim-oauth/diagrams/diagrams.md)
 
 ### Deployed Azure Resources
 
