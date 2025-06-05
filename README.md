@@ -15,7 +15,7 @@ urlFragment: remote-mcp-apim-functions-python
 ---
 -->
 
-# Secure Remote MCP Servers using Azure API Management (Experimental)
+# Secure Remote MCP Servers using Azure API Management
 
 ![Diagram](mcp-client-authorization.gif)
 
@@ -60,7 +60,7 @@ This is a [sequence diagram](infra/app/apim-oauth/diagrams/diagrams.md) to under
 
 This solution deploys a secure MCP (Model Context Protocol) server infrastructure on Azure. The architecture implements a multi-layered security model with Azure API Management serving as an intelligent gateway that handles authentication, authorization, and request routing.
 
-[overview diagram](infra/app/apim-oauth/diagrams/diagrams.md)
+![overview diagram](overview.png)
 
 ### Deployed Azure Resources
 
