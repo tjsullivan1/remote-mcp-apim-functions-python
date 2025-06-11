@@ -1,0 +1,13 @@
+{
+  "name": "Azure Project",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "postCreateCommand": "curl -fsSL https://aka.ms/install-azd.sh | bash",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-azuretools.vscode-azurecli",
+        "ms-azuretools.vscode-azurefunctions"
+      ]
+    }
+  }
+}
