@@ -15,7 +15,7 @@ urlFragment: remote-mcp-apim-functions-python
 ---
 -->
 
-# Secure Remote MCP Servers using Azure API Management
+# Secure Remote MCP Servers using Azure API Management (Experimental)
 
 ![Diagram](mcp-client-authorization.gif)
 
